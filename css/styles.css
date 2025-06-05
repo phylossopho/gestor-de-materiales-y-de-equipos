@@ -1,0 +1,936 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+/* Sección superior */
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.left-panel {
+    display: flex;
+    align-items: center;
+}
+
+.equipment-image {
+    width: 66px;
+    height: 66px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.equipment-image img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.selectors-grid {
+    display: flex;
+    gap: 10px;
+}
+
+.selector-column {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.selector-column select {
+    padding: 5px;
+    width: 200px;
+    margin-bottom: 5px;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.right-panel button {
+    padding: 5px;
+    cursor: pointer;
+    width: 150px;
+}
+
+/* Contenedor del botón CSV móvil */
+.mobile-csv-toggle-container {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 200;
+}
+
+/* Botón CSV móvil con icono de archivo */
+#csv-menu-toggle {
+    width: 40px;
+    height: 40px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Icono de archivo usando CSS */
+.file-icon {
+    width: 20px;
+    height: 24px;
+    background-color: white;
+    position: relative;
+    border-radius: 2px;
+}
+
+.file-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 6px;
+    background-color: #4CAF50;
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+.file-icon::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 3px;
+    right: 3px;
+    height: 2px;
+    background-color: #4CAF50;
+    border-radius: 1px;
+    box-shadow: 0 4px 0 #4CAF50, 0 8px 0 #4CAF50;
+}
+
+/* Menú CSV móvil */
+.mobile-csv-menu {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 150;
+    padding: 10px;
+    border-radius: 8px;
+    min-width: 150px;
+}
+
+.mobile-csv-menu button {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.mobile-csv-menu button:hover {
+    background-color: #e0e0e0;
+}
+
+.mobile-csv-menu.visible {
+    display: block;
+}
+
+/* Clases de visibilidad para dispositivos */
+.mobile-only {
+    display: none;
+}
+
+.desktop-only {
+    display: block;
+}
+
+/* Pestañas */
+.tabs-container {
+    margin-bottom: 10px;
+}
+
+.tab-buttons {
+    display: flex;
+    border-bottom: 2px solid #ccc;
+    gap: 2px;
+}
+
+.tab-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.tab-button:hover {
+    background-color: #e0e0e0;
+}
+
+.tab-button.active {
+    background-color: white;
+    border-bottom: 2px solid white;
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.conversion-description {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.conversion-description p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Tabla de materiales */
+.materials-table {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: white;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px;
+}
+
+td {
+    padding: 5px;
+}
+
+.material-cell {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.material-cell img {
+    max-height: 26px;
+    max-width: 26px;
+}
+
+.color-input {
+    width: 100%;
+    text-align: center;
+    padding: 5px 0;
+    border: 2px solid;
+}
+
+.color-input[data-color="dorado"] {
+    border-color: #FFD700;
+}
+
+.color-input[data-color="morado"] {
+    border-color: #DDA0DD;
+}
+
+.color-input[data-color="azul"] {
+    border-color: #ADD8E6;
+}
+
+.color-input[data-color="verde"] {
+    border-color: #90EE90;
+}
+
+.color-input[data-color="blanco"] {
+    border-color: white;
+    border: 2px solid #000;
+}
+
+/* Selectores de color de material */
+.bottom-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.material-selector {
+    width: 90px;
+    border: 2px solid #808080;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.material-selector img {
+    width: 66px;
+    height: 66px;
+    background-color: transparent !important; /* Aseguramos que la imagen no tenga fondo coloreado */
+}
+
+.material-selector select {
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* Botones inferiores */
+.bottom-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Botón USAR */
+.use-button {
+    padding: 10px 30px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.use-button:hover {
+    background-color: #45a049;
+}
+
+/* Botón de Galería */
+.gallery-button {
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.gallery-button:hover {
+    background-color: #0069d9;
+    transform: scale(1.05);
+}
+
+/* Icono de galería usando CSS */
+.gallery-icon {
+    width: 24px;
+    height: 20px;
+    background-color: white;
+    position: relative;
+    border-radius: 2px;
+}
+
+.gallery-icon::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 8px;
+    height: 8px;
+    background-color: #007bff;
+    border-radius: 50%;
+}
+
+.gallery-icon::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
+    height: 8px;
+    background: linear-gradient(45deg, #007bff 25%, transparent 25%, transparent 75%, #007bff 75%),
+                linear-gradient(45deg, #007bff 25%, transparent 25%, transparent 75%, #007bff 75%);
+    background-size: 4px 4px;
+    background-position: 0 0, 2px 2px;
+    border-radius: 1px;
+}
+
+/* Modales */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 0;
+    width: 80%;
+    max-width: 800px;
+    max-height: 80vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Modal específico para la galería */
+.gallery-modal-content {
+    max-width: 1000px;
+    width: 90%;
+    position: relative;
+}
+
+/* Modal para carrusel */
+.carousel-modal-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 90vh;
+}
+
+.carousel-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.carousel-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    font-size: 36px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    z-index: 100;
+}
+
+.carousel-nav:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.carousel-nav.prev {
+    left: 20px;
+}
+
+.carousel-nav.next {
+    right: 20px;
+}
+
+.carousel-info {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.carousel-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.carousel-close:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Icono de información usando CSS */
+.info-icon {
+    width: 20px;
+    height: 20px;
+    background-color: #007bff;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+}
+
+.info-icon::before {
+    content: 'i';
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Pestaña de leyenda de conversión */
+.conversion-legend-tab {
+    min-width: 50px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos para la tabla de conversión */
+.conversion-legend-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.conversion-legend-table th,
+.conversion-legend-table td {
+    border: 2px solid #333;
+    padding: 8px 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.conversion-legend-table th {
+    background-color: #f0f0f0;
+}
+
+.conversion-legend-table tbody th {
+    background-color: #e0e0e0;
+    text-align: left;
+}
+
+.conversion-notes {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.conversion-notes ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.conversion-notes li {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* Botón flotante de agregar imagen */
+.floating-add-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.floating-add-button:hover {
+    background-color: #218838;
+    transform: scale(1.1);
+}
+
+.plus-icon {
+    font-size: 28px;
+    line-height: 1;
+}
+
+/* Contenedor de la galería */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 15px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.gallery-item {
+    position: relative;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    border-color: #007bff;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-item-controls {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    gap: 5px;
+}
+
+.delete-image-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-image-button:hover {
+    background-color: #c82333;
+}
+
+.modal-header {
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+.modal-body {
+    padding: 10px;
+    overflow-y: auto;
+    max-height: calc(80vh - 100px);
+    position: relative;
+}
+
+.modal-footer {
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ccc;
+    text-align: center;
+}
+
+#message-ok {
+    padding: 5px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Responsive Design para dispositivos móviles */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 20px;
+    }
+    
+    .top-section {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .left-panel {
+        margin-bottom: 15px;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .equipment-image {
+        width: 33px;
+        height: 33px;
+    }
+    
+    .selectors-grid {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .selector-column {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+    
+    .selector-column select {
+        width: 120px;
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+    
+    .right-panel {
+        width: 100%;
+        align-items: center;
+    }
+    
+    .right-panel button {
+        width: 150px;
+        font-size: 14px;
+    }
+    
+    /* Botón de galería en móvil */
+    .gallery-button {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .gallery-icon {
+        width: 20px;
+        height: 16px;
+    }
+    
+    /* Cambiar visibilidad de botones en móvil */
+    .mobile-only {
+        display: flex;
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+    
+    /* Pestañas en móvil */
+    .tab-buttons {
+        flex-wrap: wrap;
+    }
+    
+    .tab-button {
+        padding: 8px 10px;
+        font-size: 12px;
+        flex-grow: 1;
+        text-align: center;
+        white-space: nowrap;
+    }
+    
+    th, td {
+        padding: 3px;
+        font-size: 14px;
+    }
+    
+    .material-cell img {
+        max-height: 20px;
+        max-width: 20px;
+    }
+    
+    .color-input {
+        padding: 3px 0;
+        font-size: 14px;
+    }
+    
+    .bottom-section {
+        gap: 5px;
+    }
+    
+    .material-selector {
+        width: 45px;
+        padding: 3px;
+    }
+    
+    .material-selector img {
+        width: 33px;
+        height: 33px;
+    }
+    
+    .material-selector select {
+        width: 100%;
+        font-size: 12px;
+        padding: 2px;
+    }
+    
+    .use-button {
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+    
+    .modal-content {
+        width: 90%;
+        margin: 5% auto;
+    }
+    
+    .modal-header h2, .modal-header h3 {
+        font-size: 16px;
+    }
+    
+    .close {
+        font-size: 22px;
+    }
+}
+
+/* Para dispositivos muy pequeños */
+@media (max-width: 480px) {
+    .container {
+        padding: 5px;
+    }
+    
+    header h1 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .equipment-image {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+    }
+    
+    .selectors select {
+        width: 120px;
+        font-size: 12px;
+    }
+    
+    .right-panel button {
+        width: 120px;
+        font-size: 12px;
+        padding: 4px;
+    }
+    
+    .materials-table {
+        padding: 5px;
+    }
+    
+    th, td {
+        padding: 2px;
+        font-size: 12px;
+    }
+    
+    .material-cell img {
+        max-height: 16px;
+        max-width: 16px;
+    }
+    
+    .material-selector {
+        width: 40px;
+    }
+    
+    .material-selector img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .use-button {
+        padding: 6px 15px;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Materiales</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Botón para mostrar menú CSV en móviles -->
+        <div class="mobile-csv-toggle-container">
+            <button id="csv-menu-toggle" class="mobile-only">
+                <i class="file-icon"></i>
+            </button>
+        </div>
+        
+        <!-- Menú CSV para móviles (inicialmente oculto) -->
+        <div class="mobile-csv-menu" id="mobile-csv-menu">
+            <button id="mobile-export-csv">Exportar CSV</button>
+            <button id="mobile-import-csv">Importar CSV</button>
+        </div>
+        
+        <header>
+            <h1>Gestor de Materiales y Creación de Equipos</h1>
+        </header>
+
+        <div class="top-section">
+            <div class="left-panel">
+                <div class="equipment-image">
+                    <img id="equipment-img" src="images/botas.png" alt="Equipo" onerror="this.style.display='none'">
+                </div>
+                
+                <div class="selectors-grid">
+                    <div class="selector-column">
+                        <select id="equipment-select">
+                            <option value="Espada">Espada</option>
+                            <option value="Pecho">Pecho</option>
+                            <option value="Botas">Botas</option>
+                            <option value="Casco">Casco</option>
+                            <option value="Guantes">Guantes</option>
+                            <option value="Cinturón">Cinturón</option>
+                        </select>
+                        
+                        <select id="class-select">
+                            <option value="Normal">Normal</option>
+                            <option value="Campeón y Planewalker">Campeón y Planewalker</option>
+                            <option value="Lord y Noble Lord">Lord y Noble Lord</option>
+                        </select>
+                    </div>
+                    
+                    <div class="selector-column">
+                        <select id="level-select">
+                            <option value="1">Nivel 1</option>
+                            <option value="2">Nivel 2</option>
+                            <option value="3">Nivel 3</option>
+                            <option value="4">Nivel 4</option>
+                            <option value="5">Nivel 5</option>
+                        </select>
+                        
+                        <select id="color-select">
+                            <option value="blanco">Blanco</option>
+                            <option value="verde">Verde</option>
+                            <option value="azul">Azul</option>
+                            <option value="morado">Morado</option>
+                            <option value="dorado">Dorado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <!-- Botones originales para escritorio -->
+                <button id="export-csv" class="desktop-only">Exportar CSV</button>
+                <button id="import-csv" class="desktop-only">Importar CSV</button>
+                <input type="file" id="csv-file" accept=".csv" style="display: none;">
+                <button id="show-materials">Mostrar Materiales</button>
+            </div>
+        </div>
+
+        <!-- Pestañas de conversión -->
+        <div class="tabs-container">
+            <div class="tab-buttons">
+                <button class="tab-button active" data-tab="materials">Materiales</button>
+                <button class="tab-button" data-tab="conversion1">Conversión 1</button>
+                <button class="tab-button" data-tab="conversion2">Conversión 2</button>
+                <button class="tab-button" data-tab="conversion3">Conversión 3</button>
+                <button class="tab-button" data-tab="conversionfinal">Conversión Final</button>
+                <button class="tab-button conversion-legend-tab" data-tab="conversionlegend" title="Leyenda de Conversión">
+                    <i class="info-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Contenido de las pestañas -->
+        <div class="tab-content active" id="materials-tab">
+            <div class="materials-table" id="materials-table">
+                <!-- Tabla de materiales se generará dinámicamente -->
+            </div>
+        </div>
+
+        <div class="tab-content" id="conversion1-tab">
+            <div class="conversion-description">
+                <p><strong>Conversión 1:</strong> Convierte 4 blancos → 1 verde</p>
+            </div>
+            <div class="materials-table" id="conversion1-table">
+                <!-- Tabla de conversión 1 se generará dinámicamente -->
+            </div>
+        </div>
+
+        <div class="tab-content" id="conversion2-tab">
+            <div class="conversion-description">
+                <p><strong>Conversión 2:</strong> Convierte 4 verdes → 1 azul</p>
+            </div>
+            <div class="materials-table" id="conversion2-table">
+                <!-- Tabla de conversión 2 se generará dinámicamente -->
+            </div>
+        </div>
+
+        <div class="tab-content" id="conversion3-tab">
+            <div class="conversion-description">
+                <p><strong>Conversión 3:</strong> Convierte 4 azules → 1 morado</p>
+            </div>
+            <div class="materials-table" id="conversion3-table">
+                <!-- Tabla de conversión 3 se generará dinámicamente -->
+            </div>
+        </div>
+
+        <div class="tab-content" id="conversionfinal-tab">
+            <div class="conversion-description">
+                <p><strong>Conversión Final:</strong> Convierte 4 morados → 1 dorado</p>
+            </div>
+            <div class="materials-table" id="conversionfinal-table">
+                <!-- Tabla de conversión final se generará dinámicamente -->
+            </div>
+        </div>
+
+        <div class="tab-content" id="conversionlegend-tab">
+            <div class="conversion-description">
+                <p><strong>Tabla de Conversión de Materiales:</strong></p>
+            </div>
+            <div class="materials-table" id="conversionlegend-table">
+                <table class="conversion-legend-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Blanco</th>
+                            <th>Verde</th>
+                            <th>Azul</th>
+                            <th>Morado</th>
+                            <th>Dorado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Dorado</th>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <th>Morado</th>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <th>Azul</th>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>4</td>
+                            <td>16</td>
+                        </tr>
+                        <tr>
+                            <th>Verde</th>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>4</td>
+                            <td>16</td>
+                            <td>64</td>
+                        </tr>
+                        <tr>
+                            <th>Blanco</th>
+                            <td>1</td>
+                            <td>4</td>
+                            <td>16</td>
+                            <td>64</td>
+                            <td>256</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="conversion-notes">
+                    <p><strong>Equivalencias:</strong></p>
+                    <ul>
+                        <li>4 Blancos = 1 Verde</li>
+                        <li>4 Verdes = 1 Azul</li>
+                        <li>4 Azules = 1 Morado</li>
+                        <li>4 Morados = 1 Dorado</li>
+                        <li>16 Blancos = 1 Azul</li>
+                        <li>16 Verdes = 1 Morado</li>
+                        <li>16 Azules = 1 Dorado</li>
+                        <li>64 Blancos = 1 Morado</li>
+                        <li>64 Verdes = 1 Dorado</li>
+                        <li>256 Blancos = 1 Dorado</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-section" id="bottom-section">
+            <!-- Selectores de color por material se generarán dinámicamente -->
+        </div>
+
+        <div class="bottom-buttons">
+            <button id="gallery-button" class="gallery-button">
+                <i class="gallery-icon"></i>
+            </button>
+            <button id="use-materials" class="use-button">USAR</button>
+        </div>
+
+        <!-- Modal para galería de imágenes -->
+        <div id="gallery-modal" class="modal">
+            <div class="modal-content gallery-modal-content">
+                <div class="modal-header">
+                    <h2>Galería de Imágenes</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div id="gallery-container" class="gallery-container">
+                        <!-- Las imágenes se cargarán dinámicamente aquí -->
+                    </div>
+                    <button id="add-image-button" class="floating-add-button" title="Agregar Imagen">
+                        <span class="plus-icon">+</span>
+                    </button>
+                    <input type="file" id="gallery-file-input" accept="image/*" style="display: none;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para carrusel de imágenes -->
+        <div id="carousel-modal" class="modal">
+            <div class="modal-content carousel-modal-content">
+                <div class="carousel-container">
+                    <button class="carousel-nav prev" id="carousel-prev">‹</button>
+                    <div class="carousel-image-container">
+                        <img id="carousel-image" src="" alt="Imagen actual">
+                    </div>
+                    <button class="carousel-nav next" id="carousel-next">›</button>
+                </div>
+                <div class="carousel-info">
+                    <span id="carousel-counter">1 / 1</span>
+                    <button class="carousel-close" id="carousel-close">×</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para lista completa de materiales -->
+        <div id="materials-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Lista Completa de Materiales</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div id="all-materials-table">
+                        <!-- Tabla completa se generará dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para mensajes -->
+        <div id="message-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="message-title">Información</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p id="message-text"></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="message-ok">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
